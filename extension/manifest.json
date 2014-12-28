@@ -6,6 +6,7 @@
     "content_scripts": [{
         "matches": ["*://*.kingsnake.com/*","http://market.kingsnake.com/*"],
         "js":["jquery.min.js","c.min.js"],
-        "run_at":"document_end"
+        "css":["bootstrap-css/bootstrap.min.css","bootstrap-css/bootstrap-theme.min.css","override.css"],
+        "run_at":"document_start"
     }]
 }
