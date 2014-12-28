@@ -1,6 +1,12 @@
 var prettify, removeAds;
 
 removeAds = function() {
+  $(".splashText").remove();
+  $("#headerContainer + center").remove();
+  $("#container > table center + link + table").remove();
+  $("div.medtext").remove();
+  $("#footer").remove();
+  $("body > center").remove();
   return false;
 };
 
