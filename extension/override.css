@@ -1,0 +1,34 @@
+#main-listing-container {
+
+}
+#main-listing {
+
+}
+
+#main-listing tr:hover {
+    background: rgba(0,0,0,.2)!important;
+}
+#main-listing td a {
+    padding-left:1rem;
+}
+#main-listing tr:nth-child(2n) {
+    background:rgba(50,50,50,.1)
+}
+#main-listing tr td:nth-child(5) {
+    padding-left:1rem;
+    font-size:80%;
+    font-weight:normal !important;
+}
+#main-listing tr a:visited {
+    color:rgb(175,25,175)
+}
+#main-listing tr a:hover {
+    text-decoration:underline;
+    color:rgb(200,25,25);
+}
+.extension-lightbox {
+    position:absolute;
+    width:80%;
+    left:10%;
+    top:10rem;
+}
