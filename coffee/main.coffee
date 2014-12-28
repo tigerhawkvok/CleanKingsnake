@@ -11,6 +11,8 @@ removeAds = ->
   $("#footer").remove()
   # No, I don't need to know about your mobile stuff
   $("body > center").remove()
+  # We know which page we're on. Really. We can read.
+  $(".tabbertab").remove()
   false
 
 

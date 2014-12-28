@@ -3,13 +3,9 @@
     "name": "Clean Kingsnake",
     "description": "Remove ads and cruft on Kingsnake.com",
     "version": "1.0",
-    "content_scripts": {
-        "matches":["*://*kingsnake.com/*"],
+    "content_scripts": [{
+        "matches": ["*://*.kingsnake.com/*","http://market.kingsnake.com/*"],
         "js":["jquery.min.js","c.min.js"],
         "run_at":"document_end"
-    },
-    "permissions": [
-        "http://*.kingsnake.com",
-        "https://*.kingsnake.com"
-    ]
+    }]
 }

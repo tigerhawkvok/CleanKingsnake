@@ -7,6 +7,7 @@ removeAds = function() {
   $("div.medtext").remove();
   $("#footer").remove();
   $("body > center").remove();
+  $(".tabbertab").remove();
   return false;
 };
 
