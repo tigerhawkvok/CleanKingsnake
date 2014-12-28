@@ -20,6 +20,8 @@ module.exports = (grunt) ->
         command: "cake bam"
       min:
         command: "cake min"
+      compress:
+        command: ["rm cks.zip", "7za a -ssw -y -mx9 -tzip cks.zip extension -mmt"].join("&&")
     coffee:
       compile:
         options:
@@ -36,4 +38,5 @@ module.exports = (grunt) ->
   # Now the tasks
   grunt.registerTask("default",["watch"])
   grunt.registerTask("compile","Compile coffeescript",["coffee:compile","shell:min"])
-
+  grunt.registerTask "build","Compile, update, and compress", ->
+    grunt.task.run("compile","compress")
