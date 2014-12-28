@@ -25,19 +25,20 @@ prettify = function() {
 
 helpers = function() {
   $("#main-listing td img").each(function() {
-    var href, img, newPath, path, src;
+    var href, img, maxHeight, newPath, path, src;
     href = $(this).parent().attr("href");
     $(this).parent().removeAttr("href");
     src = $(this).attr("src");
     path = src.split("/");
     img = path.pop();
-    newPath = "images/" + img;
+    newPath = "image/" + img;
+    maxHeight = $("window").height() * .8;
     $(this).parent().click(function() {
       var html;
-      html = "<div class='extension-lightbox'><img src='" + newPath + "' alt=''/><br/><p><a href='" + href + "'>Go to listing &#187;</a></div>";
+      html = "<div class='extension-lightbox-container'><div class='extension-lightbox center center-block'><img src='" + newPath + "' class='center center-block center-text' alt=''/><br/><p><a href='" + href + "'>Go to listing &#187;</a><br/><p>Tap the image to close the preview.</p></div></div>";
       $(this).after(html);
       return $(".extension-lightbox img").click(function() {
-        return $(".extension-lightbox").remove();
+        return $(".extension-lightbox-container").remove();
       });
     });
     return $(this).attr("title", "Click to see listing picture");
@@ -47,7 +48,8 @@ helpers = function() {
 
 $(function() {
   removeAds();
-  return prettify();
+  prettify();
+  return helpers();
 });
 
 //# sourceMappingURL=../coffee/maps/c.js.map

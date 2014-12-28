@@ -34,17 +34,20 @@ helpers = ->
     src = $(this).attr("src")
     path = src.split("/")
     img = path.pop()
-    newPath = "images/#{img}"
+    newPath = "image/#{img}"
+    maxHeight = $("window").height() * .8;
     # Lightbox this image with a new link to the listing
     $(this).parent().click ->
       # Do lightbox
-      html = "<div class='extension-lightbox'><img src='#{newPath}' alt=''/><br/><p><a href='#{href}'>Go to listing &#187;</a></div>"
+      html = "<div class='extension-lightbox-container'><div class='extension-lightbox center center-block'><img src='#{newPath}' class='center center-block center-text' alt=''/><br/><p><a href='#{href}'>Go to listing &#187;</a><br/><p>Tap the image to close the preview.</p></div></div>"
       $(this).after(html)
+      
       $(".extension-lightbox img").click ->
-        $(".extension-lightbox").remove()
+        $(".extension-lightbox-container").remove()
     $(this).attr("title","Click to see listing picture")
   false
 
 $ ->
   removeAds()
   prettify()
+  helpers()
