@@ -1,0 +1,27 @@
+{
+  "name": "CleanKingsnake",
+  "version": "1.0.0",
+  "description": "Clean up browsing on Kingsnake.com",
+  "main": "coffee/main.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Philip Kahn <tigerhawkvok@gmail.com>",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "/issues"
+  },
+  "homepage": "",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "coffee-script": "^1.8.0",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-shell": "^1.1.1",
+    "grunt-contrib-coffee": "^0.12.0",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
