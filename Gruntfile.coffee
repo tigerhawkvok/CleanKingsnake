@@ -14,8 +14,6 @@ module.exports = (grunt) ->
     shell:
       options:
         stderr: false
-      test:
-        command: "echo test"
       bam:
         command: "cake bam"
       min:
@@ -30,7 +28,7 @@ module.exports = (grunt) ->
           sourceMapDir: "coffee/maps"
           sourceMap: true
         files:
-          "extension/main.js":"coffee/*.coffee"
+          "extension/c.js":"coffee/*.coffee"
     watch:
       scripts:
         files: ["coffee/*.coffee"]

@@ -9,7 +9,7 @@ config =
   srcDir:  'coffee'
   outDir:  'extension'
   inFiles: [ 'color', 'imageCanvas', 'app' ]
-  outFile: 'main'
+  outFile: 'c'
   yuic:    'yuicompressor.jar'
 
 outJS    = "#{config.outDir}/#{config.outFile}"
