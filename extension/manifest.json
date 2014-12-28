@@ -1,0 +1,17 @@
+{
+  "manifest_version": 1,
+
+  "name": "Clean Kingsanke",
+  "description": "This extension demonstrates a browser action with kittens.",
+  "version": "1.0",
+    "content_scripts": {
+        "matches":["https://*.kingsnake.com/*","http://*.kingsnake.com/*"]
+        "js":["main.js"]
+        "css":[],
+        "run_at":"document_end"
+    }
+  "permissions": [
+      "http://*.kingsnake.com",
+      "https://*.kingsnake.com"
+  ]
+}
