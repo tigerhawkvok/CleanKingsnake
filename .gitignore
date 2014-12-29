@@ -3,6 +3,10 @@ Thumbs.db
 ehthumbs.db
 
 *.pem
+# Emacs temp
+\#*
+*~
+~$*
 
 # Folder config file
 Desktop.ini
