@@ -19,7 +19,7 @@ module.exports = (grunt) ->
       min:
         command: "cake min"
       compress:
-        command: ["chrome.exe --pack-extension=C:\Users\Philip\Dropbox\GitHub\CleanKingsnake --pack-extension-key=C:\Users\Philip\Dropbox\GitHub\CleanKingsnake\cleankingsnake\key.pem"].join("&&")
+        command: ["\"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe\" --pack-extension=C:\Users\Philip\Dropbox\GitHub\CleanKingsnake --pack-extension-key=C:\Users\Philip\Dropbox\GitHub\CleanKingsnake\cleankingsnake\key.pem"].join("&&")
     coffee:
       compile:
         options:
