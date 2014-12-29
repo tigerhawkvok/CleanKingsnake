@@ -27,7 +27,7 @@ prettify = ->
   false
 
 helpers = ->
-  $("#main-listing td img").each ->
+  $("#main-listing tr > td + td img").each ->
     # Link it to the real image
     href = $(this).parent().attr("href")
     $(this).parent().removeAttr("href")

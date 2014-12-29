@@ -24,7 +24,7 @@ prettify = function() {
 };
 
 helpers = function() {
-  $("#main-listing td img").each(function() {
+  $("#main-listing tr > td + td img").each(function() {
     var href, img, maxHeight, newPath, path, src;
     href = $(this).parent().attr("href");
     $(this).parent().removeAttr("href");
