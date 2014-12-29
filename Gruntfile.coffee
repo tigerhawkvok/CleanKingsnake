@@ -18,8 +18,10 @@ module.exports = (grunt) ->
         command: "cake bam"
       min:
         command: "cake min"
+      pack:
+        command: ["\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" --pack-extension=C:\\Users\\Philip\\Dropbox\\GitHub\\CleanKingsnake --pack-extension-key=C:\\Users\\Philip\\Dropbox\\GitHub\\CleanKingsnake\\cleankingsnake\\key.pem"].join("&&")
       compress:
-        command: ["\"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe\" --pack-extension=C:\Users\Philip\Dropbox\GitHub\CleanKingsnake --pack-extension-key=C:\Users\Philip\Dropbox\GitHub\CleanKingsnake\cleankingsnake\key.pem"].join("&&")
+        command: ["rm cleankingsnake.zip","7za a -mx9 -tzip -y -ssw cleankingsnake.zip cleankingsnake/*"].join("&&")
     coffee:
       compile:
         options:
@@ -28,7 +30,7 @@ module.exports = (grunt) ->
           sourceMapDir: "coffee/maps"
           sourceMap: true
         files:
-          "extension/c.js":"coffee/*.coffee"
+          "cleankingsnake/c.js":"coffee/*.coffee"
     watch:
       scripts:
         files: ["coffee/*.coffee"]
@@ -36,5 +38,7 @@ module.exports = (grunt) ->
   # Now the tasks
   grunt.registerTask("default",["watch"])
   grunt.registerTask("compile","Compile coffeescript",["coffee:compile","shell:min"])
+  grunt.registerTask("pack","Pack for release",["shell:pack"])
+  grunt.registerTask("compress","Compress for upload",["shell:compress"])
   grunt.registerTask "build","Compile, update, and compress", ->
     grunt.task.run("compile","compress")

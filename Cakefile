@@ -7,7 +7,7 @@ fs            = require 'fs'
 # order of files in `inFiles` is important
 config =
   srcDir:  'coffee'
-  outDir:  'extension'
+  outDir:  'cleankingsnake'
   inFiles: [ 'color', 'imageCanvas', 'app' ]
   outFile: 'c'
   yuic:    'yuicompressor.jar'
