@@ -1,4 +1,6 @@
-var helpers, prettify, removeAds;
+var bannerPoolAds, helpers, prettify, removeAds, removeParentTable;
+
+bannerPoolAds = ["http://www.kingsnake.com/services/bannerpoolballpython.html"];
 
 removeAds = function() {
   $(".splashText").remove();
@@ -8,6 +10,11 @@ removeAds = function() {
   $("#footer").remove();
   $("body > center").remove();
   $(".tabbertab").remove();
+  $.each(bannerPoolAds, function(url) {
+    return $("a[href='" + bannerPoolAds[url] + "']").each(function() {
+      return removeParentTable(this);
+    });
+  });
   return false;
 };
 
@@ -21,6 +28,15 @@ prettify = function() {
     return $(this).parent().remove();
   });
   return false;
+};
+
+removeParentTable = function(domElement) {
+  return $(domElement).parents().each(function() {
+    if ($(this).is("table")) {
+      $(this).remove();
+      return false;
+    }
+  });
 };
 
 helpers = function() {

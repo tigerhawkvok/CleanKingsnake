@@ -1,3 +1,7 @@
+bannerPoolAds = [
+  "http://www.kingsnake.com/services/bannerpoolballpython.html"
+  ]
+
 removeAds = ->
   # Splash text
   $(".splashText").remove()
@@ -13,6 +17,10 @@ removeAds = ->
   $("body > center").remove()
   # We know which page we're on. Really. We can read.
   $(".tabbertab").remove()
+  # Remove banner pool ads
+  $.each bannerPoolAds, (url) ->
+    $("a[href='#{bannerPoolAds[url]}']").each ->
+      removeParentTable(this)
   false
 
 
@@ -25,6 +33,14 @@ prettify = ->
   $("#main-listing tbody tr td[colspan]").each ->
     $(this).parent().remove()
   false
+
+removeParentTable = (domElement) ->
+  $(domElement).parents().each ->
+    if $(this).is("table")
+      $(this).remove()
+      return false
+
+
 
 helpers = ->
   $("#main-listing tr > td + td img").each ->
@@ -41,7 +57,7 @@ helpers = ->
       # Do lightbox
       html = "<div class='extension-lightbox-container'><div class='extension-lightbox center center-block'><img src='#{newPath}' class='center center-block center-text' alt=''/><br/><p><a href='#{href}'>Go to listing &#187;</a><br/><p>Tap the image to close the preview.</p></div></div>"
       $(this).after(html)
-      
+
       $(".extension-lightbox img").click ->
         $(".extension-lightbox-container").remove()
     $(this).attr("title","Click to see listing picture")
