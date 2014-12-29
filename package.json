@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/tigerhawkvok/CleanKingsnake"
   },
   "author": "Philip Kahn <tigerhawkvok@gmail.com>",
   "license": "GPLv3",
   "bugs": {
-    "url": "/issues"
+    "url": "https://github.com/tigerhawkvok/CleanKingsnake/issues"
   },
   "homepage": "",
   "devDependencies": {
