@@ -46,18 +46,20 @@ helpers = function() {
     $(this).parent().removeAttr("href");
     src = $(this).attr("src");
     path = src.split("/");
-    img = path.pop();
-    newPath = "image/" + img;
-    maxHeight = $("window").height() * .8;
-    $(this).parent().click(function() {
-      var html;
-      html = "<div class='extension-lightbox-container'><div class='extension-lightbox center center-block'><img src='" + newPath + "' class='center center-block center-text' alt=''/><br/><p><a href='" + href + "'>Go to listing &#187;</a><br/><p>Tap the image to close the preview.</p></div></div>";
-      $(this).after(html);
-      return $(".extension-lightbox img").click(function() {
-        return $(".extension-lightbox-container").remove();
+    if ($.inArray("thumb", path) !== -1) {
+      img = path.pop();
+      newPath = "image/" + img;
+      maxHeight = $("window").height() * .8;
+      $(this).parent().click(function() {
+        var html;
+        html = "<div class='extension-lightbox-container'><div class='extension-lightbox center center-block'><img src='" + newPath + "' class='center center-block center-text' alt=''/><br/><p><a href='" + href + "'>Go to listing &#187;</a><br/><p>Tap the image to close the preview.</p></div></div>";
+        $(this).after(html);
+        return $(".extension-lightbox img").click(function() {
+          return $(".extension-lightbox-container").remove();
+        });
       });
-    });
-    return $(this).attr("title", "Click to see listing picture");
+      return $(this).attr("title", "Click to see listing picture");
+    }
   });
   return false;
 };
