@@ -1,8 +1,31 @@
 var bannerPoolAds, helpers, prettify, removeAds, removeParentTable;
 
+String.prototype.toTitleCase = function() {
+  var lower, lowerRegEx, lowers, str, upper, upperRegEx, uppers, _i, _j, _len, _len1;
+  str = this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+  lowers = ["A", "An", "The", "And", "But", "Or", "For", "Nor", "As", "At", "By", "For", "From", "In", "Into", "Near", "Of", "On", "Onto", "To", "With"];
+  for (_i = 0, _len = lowers.length; _i < _len; _i++) {
+    lower = lowers[_i];
+    lowerRegEx = new RegExp("\\s" + lower + "\\s", "g");
+    str = str.replace(lowerRegEx, function(txt) {
+      return txt.toLowerCase();
+    });
+  }
+  uppers = ["Id", "Tv"];
+  for (_j = 0, _len1 = uppers.length; _j < _len1; _j++) {
+    upper = uppers[_j];
+    upperRegEx = new RegExp("\\b" + upper + "\\b", "g");
+    str = str.replace(upperRegEx, upper.toUpperCase());
+  }
+  return str;
+};
+
 bannerPoolAds = ["http://www.kingsnake.com/services/bannerpoolballpython.html"];
 
 removeAds = function() {
+  var url, _i, _len;
   $(".splashText").remove();
   $("#headerContainer + center").remove();
   $("#container > table center + link + table").remove();
@@ -10,10 +33,14 @@ removeAds = function() {
   $("#footer").remove();
   $("body > center").remove();
   $(".tabbertab").remove();
-  $.each(bannerPoolAds, function(url) {
-    return $("a[href='" + bannerPoolAds[url] + "']").each(function() {
+  for (_i = 0, _len = bannerPoolAds.length; _i < _len; _i++) {
+    url = bannerPoolAds[_i];
+    $("a[href='" + url + "']").each(function() {
       return removeParentTable(this);
     });
+  }
+  $("a[href^='http://banner.kingsnake.com']").each(function() {
+    return removeParentTable(this);
   });
   return false;
 };
@@ -22,10 +49,20 @@ prettify = function() {
   $("#container > table center + link + p + p + p + div + div").attr("id", "main-listing-container");
   $("#main-listing-container > center > table").attr("id", "main-listing");
   $("#main-listing-container").attr("style", "");
+  $("#main-listing").attr("style", "margin-left:-15px;").addClass("table table-responsive");
+  $("#main-listing tr > td + td + td  a").each(function() {
+    var entry;
+    entry = $(this).text();
+    return $(this).text(entry.toTitleCase());
+  });
   $("#main-listing td").removeAttr("bgcolor");
   $("#main-listing tr").removeAttr("style");
   $("#main-listing tbody tr td[colspan]").each(function() {
     return $(this).parent().remove();
+  });
+  $("#container").addClass("center-block container").attr("style", "overflow: hidden");
+  $("#main-listing-container + p a").each(function() {
+    return $(this).addClass("btn");
   });
   return false;
 };
@@ -65,9 +102,20 @@ helpers = function() {
 };
 
 $(function() {
-  removeAds();
-  prettify();
-  return helpers();
+  var bootstrapCss;
+  bootstrapCss = "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css\" />";
+  $("head").append(bootstrapCss);
+  $("body").attr("style", "background-color: #333 !important");
+  if (window.location.search.indexOf("cat") !== -1) {
+    removeAds();
+    prettify();
+    return helpers();
+  } else {
+    $("a[href^='http://banner.kingsnake.com']").each(function() {
+      return removeParentTable(this);
+    });
+    return $(".splashText").remove();
+  }
 });
 
 //# sourceMappingURL=../coffee/maps/c.js.map

@@ -1,3 +1,50 @@
+String::toTitleCase = ->
+  # From http://stackoverflow.com/a/6475125/1877527
+  str =
+    @replace /([^\W_]+[^\s-]*) */g, (txt) ->
+      txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+
+  # Certain minor words should be left lowercase unless
+  # they are the first or last words in the string
+  lowers = [
+    "A"
+    "An"
+    "The"
+    "And"
+    "But"
+    "Or"
+    "For"
+    "Nor"
+    "As"
+    "At"
+    "By"
+    "For"
+    "From"
+    "In"
+    "Into"
+    "Near"
+    "Of"
+    "On"
+    "Onto"
+    "To"
+    "With"
+    ]
+  for lower in lowers
+    lowerRegEx = new RegExp("\\s#{lower}\\s","g")
+    str = str.replace lowerRegEx, (txt) -> txt.toLowerCase()
+
+  # Certain words such as initialisms or acronyms should be left
+  # uppercase
+  uppers = [
+    "Id"
+    "Tv"
+    ]
+  for upper in uppers
+    upperRegEx = new RegExp("\\b#{upper}\\b","g")
+    str = str.replace upperRegEx, upper.toUpperCase()
+  str
+
+
 bannerPoolAds = [
   "http://www.kingsnake.com/services/bannerpoolballpython.html"
   ]
@@ -18,9 +65,14 @@ removeAds = ->
   # We know which page we're on. Really. We can read.
   $(".tabbertab").remove()
   # Remove banner pool ads
-  $.each bannerPoolAds, (url) ->
-    $("a[href='#{bannerPoolAds[url]}']").each ->
+  for url in bannerPoolAds
+    $("a[href='#{url}']").each ->
       removeParentTable(this)
+  $("a[href^='http://banner.kingsnake.com']").each ->
+    removeParentTable(this)
+  #$.each bannerPoolAds, (url) ->
+  #  $("a[href='#{bannerPoolAds[url]}']").each ->
+  #    removeParentTable(this)
   false
 
 
@@ -28,10 +80,23 @@ prettify = ->
   $("#container > table center + link + p + p + p + div + div").attr("id","main-listing-container")
   $("#main-listing-container > center > table").attr("id","main-listing")
   $("#main-listing-container").attr("style","")
+  $("#main-listing")
+  .attr("style","margin-left:-15px;")
+  .addClass("table table-responsive")
+  # document.querySelectorAll("#main-listing tr > td + td + td a")
+  $("#main-listing tr > td + td + td  a").each ->
+    # Fix retarded casing
+    entry = $(this).text()
+    $(this).text(entry.toTitleCase())
   $("#main-listing td").removeAttr("bgcolor")
   $("#main-listing tr").removeAttr("style")
   $("#main-listing tbody tr td[colspan]").each ->
     $(this).parent().remove()
+  $("#container")
+  .addClass("center-block container")
+  .attr("style","overflow: hidden")
+  $("#main-listing-container + p a").each ->
+    $(this).addClass("btn")
   false
 
 removeParentTable = (domElement) ->
@@ -64,7 +129,20 @@ helpers = ->
       $(this).attr("title","Click to see listing picture")
   false
 
+
+
 $ ->
-  removeAds()
-  prettify()
-  helpers()
+  bootstrapCss = """
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+  """
+  $("head").append(bootstrapCss)
+  $("body")
+  .attr("style","background-color: #333 !important")
+  if window.location.search.indexOf("cat") isnt -1
+    removeAds()
+    prettify()
+    helpers()
+  else
+    $("a[href^='http://banner.kingsnake.com']").each ->
+      removeParentTable(this)
+    $(".splashText").remove()
